@@ -1,10 +1,8 @@
 import { Button } from "@/components/ui/button";
-import { Package2, Bell, User } from "lucide-react";
-import { useNavigate } from "react-router-dom";
+import { Package2 } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const Navigation = () => {
-  const navigate = useNavigate();
-
   return (
     <nav className="bg-background/80 backdrop-blur-md border-b border-border sticky top-0 z-50">
       <div className="container mx-auto px-4 py-4">
@@ -31,11 +29,11 @@ const Navigation = () => {
           </div>
 
           <div className="flex items-center space-x-4">
-            <Button variant="ghost" size="sm" onClick={() => navigate('/auth')}>
-              Sign In
+            <Button variant="ghost" size="sm" asChild>
+              <Link to="/auth">Sign In</Link>
             </Button>
-            <Button variant="hero" size="sm" onClick={() => navigate('/auth')}>
-              Get Started
+            <Button variant="hero" size="sm" asChild>
+              <Link to="/auth">Get Started</Link>
             </Button>
           </div>
         </div>
