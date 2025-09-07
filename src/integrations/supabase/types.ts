@@ -14,7 +14,169 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      categories: {
+        Row: {
+          color: string | null
+          created_at: string
+          icon: string | null
+          id: string
+          name: string
+        }
+        Insert: {
+          color?: string | null
+          created_at?: string
+          icon?: string | null
+          id?: string
+          name: string
+        }
+        Update: {
+          color?: string | null
+          created_at?: string
+          icon?: string | null
+          id?: string
+          name?: string
+        }
+        Relationships: []
+      }
+      products: {
+        Row: {
+          barcode: string | null
+          batch_number: string | null
+          brand: string | null
+          category_id: string | null
+          created_at: string
+          expiry_date: string | null
+          id: string
+          image_url: string | null
+          is_consumed: boolean | null
+          name: string
+          notes: string | null
+          price: number | null
+          purchase_date: string | null
+          store: string | null
+          updated_at: string
+          user_id: string
+          warranty_date: string | null
+        }
+        Insert: {
+          barcode?: string | null
+          batch_number?: string | null
+          brand?: string | null
+          category_id?: string | null
+          created_at?: string
+          expiry_date?: string | null
+          id?: string
+          image_url?: string | null
+          is_consumed?: boolean | null
+          name: string
+          notes?: string | null
+          price?: number | null
+          purchase_date?: string | null
+          store?: string | null
+          updated_at?: string
+          user_id: string
+          warranty_date?: string | null
+        }
+        Update: {
+          barcode?: string | null
+          batch_number?: string | null
+          brand?: string | null
+          category_id?: string | null
+          created_at?: string
+          expiry_date?: string | null
+          id?: string
+          image_url?: string | null
+          is_consumed?: boolean | null
+          name?: string
+          notes?: string | null
+          price?: number | null
+          purchase_date?: string | null
+          store?: string | null
+          updated_at?: string
+          user_id?: string
+          warranty_date?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "products_category_id_fkey"
+            columns: ["category_id"]
+            isOneToOne: false
+            referencedRelation: "categories"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      profiles: {
+        Row: {
+          avatar_url: string | null
+          created_at: string
+          email: string | null
+          full_name: string | null
+          id: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          avatar_url?: string | null
+          created_at?: string
+          email?: string | null
+          full_name?: string | null
+          id?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          avatar_url?: string | null
+          created_at?: string
+          email?: string | null
+          full_name?: string | null
+          id?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      reminders: {
+        Row: {
+          created_at: string
+          days_before: number | null
+          id: string
+          is_sent: boolean | null
+          product_id: string
+          reminder_date: string
+          reminder_type: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          days_before?: number | null
+          id?: string
+          is_sent?: boolean | null
+          product_id: string
+          reminder_date: string
+          reminder_type: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          days_before?: number | null
+          id?: string
+          is_sent?: boolean | null
+          product_id?: string
+          reminder_date?: string
+          reminder_type?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "reminders_product_id_fkey"
+            columns: ["product_id"]
+            isOneToOne: false
+            referencedRelation: "products"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never
