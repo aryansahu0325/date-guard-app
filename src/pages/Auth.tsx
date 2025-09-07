@@ -25,6 +25,20 @@ export default function Auth() {
   useEffect(() => {
     const urlMode = searchParams.get('mode');
     const type = searchParams.get('type');
+    const error = searchParams.get('error');
+    const errorCode = searchParams.get('error_code');
+    const errorDescription = searchParams.get('error_description');
+    
+    // Check for expired or invalid reset links
+    if (error && (errorCode === 'otp_expired' || error === 'access_denied')) {
+      toast({
+        title: "Reset Link Expired",
+        description: errorDescription?.replace(/\+/g, ' ') || "This password reset link has expired. Please request a new one.",
+        variant: "destructive",
+      });
+      setMode('forgot-password');
+      return;
+    }
     
     // Check if this is a password reset link
     if (urlMode === 'reset-password' || type === 'recovery') {
