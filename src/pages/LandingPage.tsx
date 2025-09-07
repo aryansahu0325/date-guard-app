@@ -18,10 +18,10 @@ const LandingPage = () => {
           <div className="grid md:grid-cols-4 gap-8">
             <div className="space-y-4">
               <div className="flex items-center space-x-2">
-                <div className="w-8 h-8 bg-gradient-primary rounded-lg flex items-center justify-center">
-                  <span className="text-primary-foreground font-bold text-sm">T</span>
+                <div className="w-8 h-8 bg-gradient-primary rounded-lg flex items-center justify-center bg-[#92b692]">
+                  <span className="text-primary-foreground font-bold text-sm">A</span>
                 </div>
-                <span className="font-bold text-lg">TrackMate</span>
+                <span className="font-bold text-lg">AayuTrace</span>
               </div>
               <p className="text-muted-foreground text-sm">
                 Never miss an expiry date or warranty claim again.
@@ -42,7 +42,7 @@ const LandingPage = () => {
               <h4 className="font-semibold mb-4">Company</h4>
               <div className="space-y-2 text-sm text-muted-foreground">
                 <div>About</div>
-                <div>Blog</div>
+                
                 <div>Careers</div>
                 <div>Contact</div>
               </div>
@@ -54,7 +54,7 @@ const LandingPage = () => {
                 <div>Privacy</div>
                 <div>Terms</div>
                 <div>Security</div>
-                <div>GDPR</div>
+                
               </div>
             </div>
           </div>

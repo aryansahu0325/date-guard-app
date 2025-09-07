@@ -1,9 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { CheckCircle } from "lucide-react";
-
 const CallToAction = () => {
-  return (
-    <section className="py-20 px-4 bg-gradient-hero text-primary-foreground">
+  return <section className="py-20 px-4 bg-gradient-hero text-primary-foreground">
       <div className="container mx-auto text-center">
         <div className="max-w-4xl mx-auto space-y-8">
           <h2 className="text-4xl lg:text-5xl font-bold">
@@ -18,9 +16,7 @@ const CallToAction = () => {
             <Button variant="secondary" size="lg" className="shadow-soft">
               Start Free Trial
             </Button>
-            <Button variant="outline" size="lg" className="border-primary-foreground/20 text-primary-foreground hover:bg-primary-foreground/10">
-              Schedule Demo
-            </Button>
+            
           </div>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-6 pt-8 text-sm opacity-80">
@@ -39,8 +35,6 @@ const CallToAction = () => {
           </div>
         </div>
       </div>
-    </section>
-  );
+    </section>;
 };
-
 export default CallToAction;
