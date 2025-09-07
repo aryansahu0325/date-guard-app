@@ -3,10 +3,8 @@ import HeroSection from "@/components/HeroSection";
 import ProblemSection from "@/components/ProblemSection";
 import SolutionSection from "@/components/SolutionSection";
 import CallToAction from "@/components/CallToAction";
-
 const LandingPage = () => {
-  return (
-    <div className="min-h-screen bg-background">
+  return <div className="min-h-screen bg-background">
       <Navigation />
       <main>
         <HeroSection />
@@ -61,13 +59,9 @@ const LandingPage = () => {
             </div>
           </div>
           
-          <div className="border-t border-border mt-12 pt-8 text-center text-sm text-muted-foreground">
-            © 2024 TrackMate. All rights reserved.
-          </div>
+          <div className="border-t border-border mt-12 pt-8 text-center text-sm text-muted-foreground">© 2025 TrackMate. All rights reserved.</div>
         </div>
       </footer>
-    </div>
-  );
+    </div>;
 };
-
 export default LandingPage;
