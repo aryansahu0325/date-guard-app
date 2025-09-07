@@ -80,11 +80,15 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   const updatePassword = async (password: string) => {
     // For password reset flow, we need to exchange the URL tokens for a session first
+    const urlParams = new URLSearchParams(window.location.search);
     const hashParams = new URLSearchParams(window.location.hash.substring(1));
-    const accessToken = hashParams.get('access_token');
-    const refreshToken = hashParams.get('refresh_token');
     
-    if (accessToken && refreshToken) {
+    // Check both URL query params and hash for tokens
+    const accessToken = urlParams.get('access_token') || hashParams.get('access_token');
+    const refreshToken = urlParams.get('refresh_token') || hashParams.get('refresh_token');
+    const type = urlParams.get('type') || hashParams.get('type');
+    
+    if (accessToken && refreshToken && type === 'recovery') {
       // Set the session from the URL tokens
       const { error: sessionError } = await supabase.auth.setSession({
         access_token: accessToken,
@@ -92,8 +96,10 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       });
       
       if (sessionError) {
-        return { error: sessionError };
+        return { error: new Error('Failed to restore session. Please request a new password reset link.') };
       }
+    } else if (!session) {
+      return { error: new Error('Auth session missing! Please request a new password reset link.') };
     }
     
     const { error } = await supabase.auth.updateUser({

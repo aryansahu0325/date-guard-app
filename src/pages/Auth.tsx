@@ -24,7 +24,10 @@ export default function Auth() {
 
   useEffect(() => {
     const urlMode = searchParams.get('mode');
-    if (urlMode === 'reset-password') {
+    const type = searchParams.get('type');
+    
+    // Check if this is a password reset link
+    if (urlMode === 'reset-password' || type === 'recovery') {
       setMode('reset-password');
     }
   }, [searchParams]);
