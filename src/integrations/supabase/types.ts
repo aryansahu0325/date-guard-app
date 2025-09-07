@@ -38,6 +38,89 @@ export type Database = {
         }
         Relationships: []
       }
+      notification_settings: {
+        Row: {
+          created_at: string
+          daily_digest: boolean
+          email_notifications: boolean
+          expiry_reminder_days: number
+          id: string
+          push_notifications: boolean
+          updated_at: string
+          user_id: string
+          warranty_reminder_days: number
+        }
+        Insert: {
+          created_at?: string
+          daily_digest?: boolean
+          email_notifications?: boolean
+          expiry_reminder_days?: number
+          id?: string
+          push_notifications?: boolean
+          updated_at?: string
+          user_id: string
+          warranty_reminder_days?: number
+        }
+        Update: {
+          created_at?: string
+          daily_digest?: boolean
+          email_notifications?: boolean
+          expiry_reminder_days?: number
+          id?: string
+          push_notifications?: boolean
+          updated_at?: string
+          user_id?: string
+          warranty_reminder_days?: number
+        }
+        Relationships: []
+      }
+      notifications: {
+        Row: {
+          created_at: string
+          id: string
+          is_read: boolean
+          message: string
+          product_id: string | null
+          scheduled_for: string | null
+          title: string
+          type: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          is_read?: boolean
+          message: string
+          product_id?: string | null
+          scheduled_for?: string | null
+          title: string
+          type: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          is_read?: boolean
+          message?: string
+          product_id?: string | null
+          scheduled_for?: string | null
+          title?: string
+          type?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "notifications_product_id_fkey"
+            columns: ["product_id"]
+            isOneToOne: false
+            referencedRelation: "products"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       products: {
         Row: {
           barcode: string | null
@@ -182,7 +265,10 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      generate_product_notifications: {
+        Args: Record<PropertyKey, never>
+        Returns: undefined
+      }
     }
     Enums: {
       [_ in never]: never
