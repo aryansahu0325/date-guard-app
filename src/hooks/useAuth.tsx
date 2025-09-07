@@ -79,9 +79,16 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   };
 
   const updatePassword = async (password: string) => {
-    // For password reset flow, we need to exchange the URL tokens for a session first
+    // Check for error parameters first (expired/invalid links)
     const urlParams = new URLSearchParams(window.location.search);
     const hashParams = new URLSearchParams(window.location.hash.substring(1));
+    
+    const error = urlParams.get('error') || hashParams.get('error');
+    const errorCode = urlParams.get('error_code') || hashParams.get('error_code');
+    
+    if (error && (errorCode === 'otp_expired' || error === 'access_denied')) {
+      return { error: new Error('Password reset link has expired. Please request a new password reset link.') };
+    }
     
     // Check both URL query params and hash for tokens
     const accessToken = urlParams.get('access_token') || hashParams.get('access_token');
@@ -98,14 +105,17 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       if (sessionError) {
         return { error: new Error('Failed to restore session. Please request a new password reset link.') };
       }
+      
+      // Wait a moment for the session to be established
+      await new Promise(resolve => setTimeout(resolve, 100));
     } else if (!session) {
       return { error: new Error('Auth session missing! Please request a new password reset link.') };
     }
     
-    const { error } = await supabase.auth.updateUser({
+    const { error: updateError } = await supabase.auth.updateUser({
       password: password
     });
-    return { error };
+    return { error: updateError };
   };
 
   const value = {
