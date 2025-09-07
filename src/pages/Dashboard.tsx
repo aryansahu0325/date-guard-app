@@ -4,9 +4,10 @@ import { supabase } from '@/integrations/supabase/client';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { Plus, Bell, Package, Calendar, AlertTriangle } from 'lucide-react';
+import { Plus, Bell, Package, Calendar, AlertTriangle, LogOut, Shield } from 'lucide-react';
 import { toast } from '@/hooks/use-toast';
 import { useNavigate } from 'react-router-dom';
+import { NotificationBell } from '@/components/NotificationBell';
 
 interface Product {
   id: string;
@@ -127,11 +128,17 @@ export default function Dashboard() {
             <p className="text-muted-foreground">Welcome back, {user?.user_metadata?.full_name || user?.email}</p>
           </div>
           <div className="flex items-center gap-4">
+            <NotificationBell />
+            <Button onClick={() => navigate('/notifications')} variant="outline" className="gap-2">
+              <Bell className="h-4 w-4" />
+              Notifications
+            </Button>
             <Button onClick={() => navigate('/add-product')} className="gap-2">
               <Plus className="h-4 w-4" />
               Add Product
             </Button>
-            <Button variant="outline" onClick={handleSignOut}>
+            <Button variant="outline" onClick={handleSignOut} className="gap-2">
+              <LogOut className="h-4 w-4" />
               Sign Out
             </Button>
           </div>
