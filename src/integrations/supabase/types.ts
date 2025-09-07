@@ -260,6 +260,99 @@ export type Database = {
           },
         ]
       }
+      shopping_list_items: {
+        Row: {
+          brand: string | null
+          category_id: string | null
+          created_at: string
+          estimated_price: number | null
+          id: string
+          is_completed: boolean
+          notes: string | null
+          priority: string | null
+          product_name: string
+          quantity: number
+          shopping_list_id: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          brand?: string | null
+          category_id?: string | null
+          created_at?: string
+          estimated_price?: number | null
+          id?: string
+          is_completed?: boolean
+          notes?: string | null
+          priority?: string | null
+          product_name: string
+          quantity?: number
+          shopping_list_id: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          brand?: string | null
+          category_id?: string | null
+          created_at?: string
+          estimated_price?: number | null
+          id?: string
+          is_completed?: boolean
+          notes?: string | null
+          priority?: string | null
+          product_name?: string
+          quantity?: number
+          shopping_list_id?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "shopping_list_items_category_id_fkey"
+            columns: ["category_id"]
+            isOneToOne: false
+            referencedRelation: "categories"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "shopping_list_items_shopping_list_id_fkey"
+            columns: ["shopping_list_id"]
+            isOneToOne: false
+            referencedRelation: "shopping_lists"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      shopping_lists: {
+        Row: {
+          created_at: string
+          description: string | null
+          id: string
+          is_completed: boolean
+          name: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          description?: string | null
+          id?: string
+          is_completed?: boolean
+          name: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          description?: string | null
+          id?: string
+          is_completed?: boolean
+          name?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never

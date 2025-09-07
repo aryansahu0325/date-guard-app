@@ -129,9 +129,13 @@ export default function Dashboard() {
           </div>
           <div className="flex items-center gap-4">
             <NotificationBell />
-            <Button onClick={() => navigate('/notifications')} variant="outline" className="gap-2">
-              <Bell className="h-4 w-4" />
-              Notifications
+            <Button onClick={() => navigate('/products')} variant="outline" className="gap-2">
+              <Package className="h-4 w-4" />
+              Products
+            </Button>
+            <Button onClick={() => navigate('/analytics')} variant="outline" className="gap-2">
+              <Shield className="h-4 w-4" />
+              Analytics
             </Button>
             <Button onClick={() => navigate('/add-product')} className="gap-2">
               <Plus className="h-4 w-4" />
