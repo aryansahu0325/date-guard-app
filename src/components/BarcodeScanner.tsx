@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { Html5Qrcode } from 'html5-qrcode';
 import { Button } from '@/components/ui/button';
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { ScanLine, X } from 'lucide-react';
 import { toast } from '@/hooks/use-toast';
 
@@ -54,8 +54,18 @@ export default function BarcodeScanner({ onScanSuccess, onError }: BarcodeScanne
         aspectRatio: 1.0,
       };
 
+      // Try back camera first, fallback to any available camera
+      let cameraId = { facingMode: "environment" };
+      if (cameras.length > 0) {
+        // Use the first available camera as fallback
+        const backCamera = cameras.find(camera => 
+          camera.label && camera.label.toLowerCase().includes('back')
+        );
+        cameraId = backCamera ? backCamera.id : cameras[0].id;
+      }
+
       await scanner.start(
-        { facingMode: "environment" }, // Use back camera
+        cameraId,
         config,
         (decodedText) => {
           // Success callback
@@ -124,12 +134,12 @@ export default function BarcodeScanner({ onScanSuccess, onError }: BarcodeScanne
               <X className="h-4 w-4" />
             </Button>
           </DialogTitle>
+          <DialogDescription>
+            Position the barcode or QR code within the scanning area below.
+          </DialogDescription>
         </DialogHeader>
         
         <div className="space-y-4">
-          <div className="text-sm text-muted-foreground">
-            Position the barcode or QR code within the scanning area below.
-          </div>
           
           <div className="flex flex-col items-center space-y-4">
             {!isScanning ? (
