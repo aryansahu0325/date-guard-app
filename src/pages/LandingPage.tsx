@@ -59,7 +59,7 @@ const LandingPage = () => {
             </div>
           </div>
           
-          <div className="border-t border-border mt-12 pt-8 text-center text-sm text-muted-foreground">© 2025 TrackMate. All rights reserved.</div>
+          <div className="border-t border-border mt-12 pt-8 text-center text-sm text-muted-foreground">© 2025 AayuTrace. All rights reserved.</div>
         </div>
       </footer>
     </div>;
