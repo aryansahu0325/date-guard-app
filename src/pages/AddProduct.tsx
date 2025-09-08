@@ -10,6 +10,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { ArrowLeft } from 'lucide-react';
 import { toast } from '@/hooks/use-toast';
+import BarcodeScanner from '@/components/BarcodeScanner';
 
 interface Category {
   id: string;
@@ -62,6 +63,12 @@ export default function AddProduct() {
 
   const handleInputChange = (field: string, value: string) => {
     setFormData(prev => ({ ...prev, [field]: value }));
+  };
+
+  const handleBarcodeScanned = (barcode: string) => {
+    handleInputChange('barcode', barcode);
+    // You could potentially add product lookup functionality here
+    // by calling an API with the barcode to get product information
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -292,12 +299,16 @@ export default function AddProduct() {
                 
                 <div className="space-y-2">
                   <Label htmlFor="barcode">Barcode/QR Code</Label>
-                  <Input
-                    id="barcode"
-                    value={formData.barcode}
-                    onChange={(e) => handleInputChange('barcode', e.target.value)}
-                    placeholder="Scan or enter manually"
-                  />
+                  <div className="flex gap-2">
+                    <Input
+                      id="barcode"
+                      value={formData.barcode}
+                      onChange={(e) => handleInputChange('barcode', e.target.value)}
+                      placeholder="Scan or enter manually"
+                      className="flex-1"
+                    />
+                    <BarcodeScanner onScanSuccess={handleBarcodeScanned} />
+                  </div>
                 </div>
               </div>
 
