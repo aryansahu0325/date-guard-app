@@ -13,7 +13,7 @@ const LandingPage = () => {
         <CallToAction />
       </main>
       
-      <footer id="footer" className="bg-muted/30 py-12 px-4">
+      <footer className="bg-muted/30 py-12 px-4">
         <div className="container mx-auto">
           <div className="grid md:grid-cols-4 gap-8">
             <div className="space-y-4">
@@ -31,28 +31,30 @@ const LandingPage = () => {
             <div>
               <h4 className="font-semibold mb-4">Product</h4>
               <div className="space-y-2 text-sm text-muted-foreground">
-                <a href="#solution" className="block hover:text-foreground transition-colors cursor-pointer">Features</a>
-                <a href="#cta" className="block hover:text-foreground transition-colors cursor-pointer">Pricing</a>
-                <a href="#solution" className="block hover:text-foreground transition-colors cursor-pointer">Demo</a>
-                <a href="#cta" className="block hover:text-foreground transition-colors cursor-pointer">Support</a>
+                <div>Features</div>
+                <div>Pricing</div>
+                
+                <div>Support</div>
               </div>
             </div>
             
             <div>
               <h4 className="font-semibold mb-4">Company</h4>
               <div className="space-y-2 text-sm text-muted-foreground">
-                <a href="#hero" className="block hover:text-foreground transition-colors cursor-pointer">About</a>
-                <a href="#cta" className="block hover:text-foreground transition-colors cursor-pointer">Careers</a>
-                <a href="#cta" className="block hover:text-foreground transition-colors cursor-pointer">Contact</a>
+                <div>About</div>
+                
+                <div>Careers</div>
+                <div>Contact</div>
               </div>
             </div>
             
             <div>
               <h4 className="font-semibold mb-4">Legal</h4>
               <div className="space-y-2 text-sm text-muted-foreground">
-                <a href="#footer" className="block hover:text-foreground transition-colors cursor-pointer">Privacy</a>
-                <a href="#footer" className="block hover:text-foreground transition-colors cursor-pointer">Terms</a>
-                <a href="#footer" className="block hover:text-foreground transition-colors cursor-pointer">Security</a>
+                <div>Privacy</div>
+                <div>Terms</div>
+                <div>Security</div>
+                
               </div>
             </div>
           </div>
