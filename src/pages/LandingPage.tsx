@@ -3,6 +3,7 @@ import HeroSection from "@/components/HeroSection";
 import ProblemSection from "@/components/ProblemSection";
 import SolutionSection from "@/components/SolutionSection";
 import CallToAction from "@/components/CallToAction";
+import Chatbot from "@/components/Chatbot";
 const LandingPage = () => {
   return <div className="min-h-screen bg-background">
       <Navigation />
@@ -62,6 +63,9 @@ const LandingPage = () => {
           <div className="border-t border-border mt-12 pt-8 text-center text-sm text-muted-foreground">© 2025 AayuTrace. All rights reserved.</div>
         </div>
       </footer>
+      
+      {/* Chatbot */}
+      <Chatbot />
     </div>;
 };
 export default LandingPage;
