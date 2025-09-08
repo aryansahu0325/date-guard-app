@@ -4,7 +4,7 @@ import { supabase } from '@/integrations/supabase/client';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { Plus, Bell, Package, Calendar, AlertTriangle, LogOut, Shield } from 'lucide-react';
+import { Plus, Bell, Package, Calendar, AlertTriangle, LogOut, Shield, Trash2 } from 'lucide-react';
 import { toast } from '@/hooks/use-toast';
 import { useNavigate } from 'react-router-dom';
 import { NotificationBell } from '@/components/NotificationBell';
@@ -93,6 +93,42 @@ export default function Dashboard() {
   const handleSignOut = async () => {
     await signOut();
     navigate('/');
+  };
+
+  const handleDeleteProduct = async (productId: string, productName: string) => {
+    if (!confirm(`Are you sure you want to delete "${productName}"? This action cannot be undone.`)) {
+      return;
+    }
+
+    try {
+      const { error } = await supabase
+        .from('products')
+        .delete()
+        .eq('id', productId)
+        .eq('user_id', user?.id);
+
+      if (error) throw error;
+
+      // Update local state
+      setProducts(prev => prev.filter(p => p.id !== productId));
+      
+      // Update stats
+      setStats(prev => ({
+        ...prev,
+        total_products: prev.total_products - 1
+      }));
+
+      toast({
+        title: "Product deleted",
+        description: `"${productName}" has been deleted successfully.`,
+      });
+    } catch (error: any) {
+      toast({
+        title: "Error",
+        description: error.message || "Failed to delete product",
+        variant: "destructive",
+      });
+    }
   };
 
   const getExpiryStatus = (date: string | null) => {
@@ -231,25 +267,35 @@ export default function Dashboard() {
                           </div>
                         </div>
                       </div>
-                      <div className="text-right space-y-1">
-                        {expiryStatus && (
-                          <div className="text-sm">
-                            <Badge variant={expiryStatus.color as any} className="text-xs">
-                              {expiryStatus.status === 'expired' 
-                                ? `Expired ${expiryStatus.days}d ago`
-                                : `Expires in ${expiryStatus.days}d`}
-                            </Badge>
-                          </div>
-                        )}
-                        {warrantyStatus && (
-                          <div className="text-sm">
-                            <Badge variant={warrantyStatus.color as any} className="text-xs">
-                              {warrantyStatus.status === 'expired' 
-                                ? `Warranty expired ${warrantyStatus.days}d ago`
-                                : `Warranty expires in ${warrantyStatus.days}d`}
-                            </Badge>
-                          </div>
-                        )}
+                      <div className="flex items-center gap-3">
+                        <div className="text-right space-y-1">
+                          {expiryStatus && (
+                            <div className="text-sm">
+                              <Badge variant={expiryStatus.color as any} className="text-xs">
+                                {expiryStatus.status === 'expired' 
+                                  ? `Expired ${expiryStatus.days}d ago`
+                                  : `Expires in ${expiryStatus.days}d`}
+                              </Badge>
+                            </div>
+                          )}
+                          {warrantyStatus && (
+                            <div className="text-sm">
+                              <Badge variant={warrantyStatus.color as any} className="text-xs">
+                                {warrantyStatus.status === 'expired' 
+                                  ? `Warranty expired ${warrantyStatus.days}d ago`
+                                  : `Warranty expires in ${warrantyStatus.days}d`}
+                              </Badge>
+                            </div>
+                          )}
+                        </div>
+                        <Button
+                          variant="outline"
+                          size="sm"
+                          onClick={() => handleDeleteProduct(product.id, product.name)}
+                          className="text-destructive hover:text-destructive-foreground hover:bg-destructive"
+                        >
+                          <Trash2 className="h-4 w-4" />
+                        </Button>
                       </div>
                     </div>
                   );
