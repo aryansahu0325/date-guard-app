@@ -9,6 +9,8 @@ import Auth from "./pages/Auth";
 import Dashboard from "./pages/Dashboard";
 import AddProduct from "./pages/AddProduct";
 import Notifications from "./pages/Notifications";
+import JoinFamily from "./pages/JoinFamily";
+import FamilySettings from "./pages/FamilySettings";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -74,6 +76,12 @@ const App = () => (
                 <Notifications />
               </ProtectedRoute>
             } />
+            <Route path="/family" element={
+              <ProtectedRoute>
+                <FamilySettings />
+              </ProtectedRoute>
+            } />
+            <Route path="/join-family" element={<JoinFamily />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>

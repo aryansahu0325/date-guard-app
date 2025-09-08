@@ -6,7 +6,8 @@ import {
   BarChart3, 
   Tag, 
   ShoppingCart, 
-  Bell, 
+  Bell,
+  Users,
   LogOut 
 } from "lucide-react";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
@@ -33,6 +34,7 @@ const mainItems = [
   { title: "Categories", url: "/categories", icon: Tag },
   { title: "Shopping Lists", url: "/shopping-lists", icon: ShoppingCart },
   { title: "Notifications", url: "/notifications", icon: Bell },
+  { title: "Family", url: "/family", icon: Users },
 ];
 
 export function AppSidebar() {
