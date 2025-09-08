@@ -411,13 +411,16 @@ export default function ShoppingLists() {
     setSelectedList(list);
     if (item) {
       setEditingItem(item);
+      const validPriority = item.priority && ['low', 'medium', 'high'].includes(item.priority) 
+        ? item.priority as 'low' | 'medium' | 'high' 
+        : 'medium';
       setItemFormData({
         product_name: item.product_name,
         brand: item.brand || '',
         quantity: item.quantity,
         category_id: item.category?.id || '',
         notes: item.notes || '',
-        priority: item.priority,
+        priority: validPriority,
         estimated_price: item.estimated_price?.toString() || ''
       });
     } else {
