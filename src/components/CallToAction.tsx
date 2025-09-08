@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { CheckCircle } from "lucide-react";
 const CallToAction = () => {
-  return <section className="py-20 px-4 bg-gradient-hero text-primary-foreground">
+  return <section id="cta" className="py-20 px-4 bg-gradient-hero text-primary-foreground">
       <div className="container mx-auto text-center">
         <div className="max-w-4xl mx-auto space-y-8">
           <h2 className="text-4xl lg:text-5xl font-bold">
