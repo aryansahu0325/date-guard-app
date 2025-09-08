@@ -455,6 +455,10 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      can_manage_family_members: {
+        Args: { _family_id: string }
+        Returns: boolean
+      }
       generate_invitation_token: {
         Args: Record<PropertyKey, never>
         Returns: string
@@ -469,6 +473,10 @@ export type Database = {
       }
       is_family_member: {
         Args: { _family_id: string; _user_id: string }
+        Returns: boolean
+      }
+      is_family_member_of: {
+        Args: { _family_id: string }
         Returns: boolean
       }
     }
